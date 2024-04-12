@@ -17,11 +17,5 @@ public class StandardResponse<T> {
     public T data;
     public boolean isSuccess;
     
-    public StandardResponse(int statusCode, String message, T data, boolean isSuccess) {
-        this.statusCode = statusCode;
-        this.message = message;
-        this.data = data;
-        this.isSuccess = isSuccess;
-    }
     
 }
