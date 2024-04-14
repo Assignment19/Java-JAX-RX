@@ -9,5 +9,5 @@ public interface IPatientService {
     public StandardResponse<Patient> savePatient(Patient patient);
     public StandardResponse<Patient> removePatient(int id);
     public StandardResponse<List<Patient>> getAllPatients();
-    public StandardResponse<Patient> updatePatient(int id);
+    public StandardResponse<Patient> updatePatient(int id, Patient patient);
 }

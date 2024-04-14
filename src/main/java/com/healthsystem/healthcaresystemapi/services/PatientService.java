@@ -83,20 +83,20 @@ public class PatientService implements IPatientService{
     }
     
     @Override
-    public StandardResponse<Patient> updatePatient(int id){
+    public StandardResponse<Patient> updatePatient(int id, Patient patient){
         try{
-        var patient = patientDAO.findById(id);
-        if(patient!=null){
+        var result = patientDAO.findById(id);
+        if(result!=null){
         patientDAO.updatePatient(patient);
         return new StandardResponse(200, "Patient update successfull", patient, true);
         }
         else{
-        return new StandardResponse(400, "Patient not available", null, false);
+        return new StandardResponse(400, "Patient not available", patient, false);
         }
     }
         
     catch(Exception ex){
-        return new StandardResponse(400, ex.getMessage(), null, false);     
+        return new StandardResponse(400, ex.getMessage(), patient, false);     
 }
 }
     

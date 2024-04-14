@@ -48,8 +48,8 @@ public StandardResponse<Patient> getPatient(@PathParam("id") int id) {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Update person", response = Patient.class)
-    public StandardResponse<Patient> updatePatient(@PathParam("id") int id) {
-       return (patientService.updatePatient(id));
+    public StandardResponse<Patient> updatePatient(@PathParam("id") int id, Patient patient) {
+       return (patientService.updatePatient(id, patient));
     }
     
    @DELETE
