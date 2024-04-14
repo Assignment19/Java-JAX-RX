@@ -1,12 +1,10 @@
 package com.healthsystem.healthcaresystemapi.resources;
-
 import com.healthsystem.healthcaresystemapi.models.Patient;
 import com.healthsystem.healthcaresystemapi.services.PatientService;
 import com.healthsystem.healthcaresystemapi.utility.StandardResponse;
 import java.util.List;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
