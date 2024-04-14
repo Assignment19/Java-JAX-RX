@@ -1,7 +1,5 @@
 
 package com.healthsystem.healthcaresystemapi.utility;
-import com.sun.jersey.api.core.ResourceConfig;
-import com.sun.jersey.api.json.JSONConfiguration;
 import io.swagger.jaxrs.config.BeanConfig;
 
 public class SwaggerConfig {
