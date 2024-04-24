@@ -16,7 +16,18 @@ public class PatientDAO implements IPatientDAO{
 
     @Override
     public void createPatient(Patient patient) {
-       patientMap.put((int) patient.getId(), patient);
+        // Generate a unique ID for the patient
+        int nextId = getNextAvailableId();
+        patient.setId(nextId);
+        // Add the patient to the map with the new ID
+        patientMap.put(nextId, patient);
+    }
+
+    @Override
+    public int getNextAvailableId() {
+        // Find the maximum ID currently in use and increment by 1
+        int maxId = patientMap.keySet().stream().mapToInt(Integer::intValue).max().orElse(0);
+        return maxId + 1;
     }
 
     @Override

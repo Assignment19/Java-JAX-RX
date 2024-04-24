@@ -14,6 +14,7 @@ import lombok.ToString;
 public class Patient extends Person{
     
     private Person person;
+    private long id;
     private String medicalHistory;
     private String currentHealthStatus;
     

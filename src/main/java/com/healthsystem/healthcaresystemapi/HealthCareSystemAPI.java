@@ -1,29 +1,100 @@
 package com.healthsystem.healthcaresystemapi;
-import com.healthsystem.healthcaresystemapi.utility.SwaggerConfig;
-import com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory;
-import com.sun.jersey.api.core.PackagesResourceConfig;
+
+//import java.io.IOException;
+//import java.net.URI;
+//import javax.ws.rs.core.UriBuilder;
+//
+//import org.glassfish.grizzly.http.server.HttpHandler;
+//import org.glassfish.grizzly.http.server.HttpServer;
+//import org.glassfish.grizzly.http.server.NetworkListener;
+//import org.glassfish.grizzly.threadpool.ThreadPoolConfig;
+//import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+//import org.glassfish.jersey.server.ContainerFactory;
+//import org.glassfish.jersey.server.ResourceConfig;
+
+import com.healthsystem.healthcaresystemapi.utility.Application;
+import org.glassfish.grizzly.http.server.HttpHandler;
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.server.NetworkListener;
+import org.glassfish.grizzly.threadpool.ThreadPoolConfig;
+import org.glassfish.jersey.server.ContainerFactory;
+
 import java.io.IOException;
-import java.net.URI;
 
 public class HealthCareSystemAPI {
+//    private static URI getBaseURI() {
+//        return UriBuilder.fromUri("http://localhost/").port(8080).build();
+//    }
+//
+//    static final URI BASE_URI = getBaseURI();
+//
+//    static HttpServer startServer() {
+//        ResourceConfig rc = ResourceConfig.forApplication(new ShopApplication());
+//        return GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
+//    }
+//
+//    public static void main(String[] args) throws IOException {
+//        System.out.println("Starting grizzly...");
+//        HttpServer httpServer = startServer();
+//        System.out.printf("Jersey app started with WADL available at %sapplication.wadl%n", BASE_URI);
+//        System.out.println("Hit enter to stop it...");
+//        System.in.read();
+//        httpServer.shutdownNow();
+//    }
+
+    // Base URI the Grizzly HTTP server will listen on
+    private static final String PACKAGE = "com.healthsystem.healthcaresystemapi";
+
+    /**
+     * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
+     */
+    private static HttpServer configure() {
+        final Application app = new Application();
+
+        app.setApplicationName("Health API");
+
+        System.out.println("Loading packages...");
+        app.packages(PACKAGE);
+
+        int maxThreads = Runtime.getRuntime().availableProcessors();
+        System.out.println("Max Threads: " + maxThreads);
+
+        HttpServer httpServer = new HttpServer();
+
+        // Thread Pool
+        ThreadPoolConfig threadPoolConfig = ThreadPoolConfig.defaultConfig()
+                .setCorePoolSize(maxThreads)
+                .setMaxPoolSize(maxThreads)
+                .setQueueLimit(-1);
+
+        // Listener
+        NetworkListener listener = new NetworkListener("test_management", "localhost", 8080);
+        listener.setSendFileEnabled(false);
+        listener.setSecure(false);
+        listener.setMaxPendingBytes(2 * 1024 * 1024);
+        listener.getTransport().setWorkerThreadPoolConfig(threadPoolConfig);
+        httpServer.addListener(listener);
+
+        // Handler
+        HttpHandler handler = ContainerFactory.createContainer(HttpHandler.class, app);
+        httpServer.getServerConfiguration().addHttpHandler(handler, "/healthcaresystemapi");
+
+        return httpServer;
+    }
+
+    /**
+     * Server method.
+     */
     public static void main(String[] args) throws IOException {
-        // Initialize Swagger
-        SwaggerConfig.init();
-
-   // Define your JAX-RS resource configuration using PackagesResourceConfig
-        PackagesResourceConfig rc = new PackagesResourceConfig("com.healthsystem.healthcaresystemapi.resources");
-
-        // Enable POJO mapping for JSON support
-        rc.getFeatures().put("com.sun.jersey.api.json.POJOMappingFeature", true);
-
-        // Create and start the Grizzly HTTP server
-        HttpServer server = GrizzlyServerFactory.createHttpServer(URI.create("http://localhost:8080"), rc);
+        System.out.println("Starting server..");
+        HttpServer server = configure();
         server.start();
-
-        System.out.println("HealthCareSystemAPI started. Hit enter to stop it...");
-        System.in.read(); // Keep the server running until the user hits enter
-
-        server.stop();
+        System.out.println("Server started successfully.");
+        System.out.println("Press 'Q' to quite.");
+        int i = 0;
+        while (i != 81 && i != 113) {
+            i = System.in.read();
+        }
+        server.shutdownNow();
     }
 }

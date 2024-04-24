@@ -9,4 +9,5 @@ public interface IPatientDAO {
   public void updatePatient(Patient patient);
   public void deletePatient(int id);
   public List<Patient> getAllPatients();
+  public int getNextAvailableId();
 }

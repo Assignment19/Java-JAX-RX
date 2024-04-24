@@ -3,6 +3,11 @@ import com.healthsystem.healthcaresystemapi.services.iservices.IPatientService;
 import com.healthsystem.healthcaresystemapi.dao.PatientDAO;
 import com.healthsystem.healthcaresystemapi.models.Patient;
 import com.healthsystem.healthcaresystemapi.utility.StandardResponse;
+import lombok.var;
+
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PatientService implements IPatientService{
@@ -17,15 +22,16 @@ public class PatientService implements IPatientService{
     try{
     if(patientDAO.findById(id)!=null){
     var patient = patientDAO.findById(id);
-    StandardResponse response = new StandardResponse(200, "Success", patient, true);
-    return response;}
+    return new StandardResponse<>(200, "Success", patient, true);
+
+    }
     else{
-        StandardResponse response = new StandardResponse(400, "faild", null, false);
-        return response;
+        return new StandardResponse<>(400, "Patient not available", null, false);
+
     }
     }
     catch(Exception ex){
-    return new StandardResponse(400, ex.getMessage(), null, false);}
+    return new StandardResponse<>(400, ex.getMessage(), null, false);}
     }
     
     
@@ -35,17 +41,17 @@ public class PatientService implements IPatientService{
         var result = patientDAO.findById((int)patient.getId());
         if(result==null){
         patientDAO.createPatient(patient);
-        StandardResponse response = new StandardResponse(200, "Success", patient, true);
-        return response;
+        return new StandardResponse<>(200, "Create Success", patient, true);
+
         
         }
         else{
-         StandardResponse response = new StandardResponse(400, "User Already Inserted", patient, false);
-         return response;
+         return new StandardResponse<>(400, "User Already Inserted", patient, false);
+
         }
         }
         catch(Exception ex){
-        return new StandardResponse(400, ex.getMessage(), null, false);}
+        return new StandardResponse<>(400, ex.getMessage(), null, false);}
     } 
     
     @Override
@@ -54,17 +60,17 @@ public class PatientService implements IPatientService{
     var result = patientDAO.findById(id);
     if(result!=null){
     patientDAO.deletePatient(id);
-    StandardResponse response = new StandardResponse(200, "Remove Success", result, true);
-        return response;    
+    return new StandardResponse<>(200, "Remove Success", result, true);
+
     }
     
     else{
-    StandardResponse response = new StandardResponse(400, "User not found", result, false);
-         return response;
+    return new StandardResponse<>(400, "User not found", result, false);
+
     }
     }
     catch(Exception ex){
-        return new StandardResponse(400, ex.getMessage(), null, false);
+        return new StandardResponse<>(400, ex.getMessage(), null, false);
     }
     
     }
@@ -73,12 +79,11 @@ public class PatientService implements IPatientService{
     @Override
     public StandardResponse<List<Patient>> getAllPatients(){
     try{
-        List patientList = patientDAO.getAllPatients();
-        StandardResponse response = new StandardResponse(200, "Patient list retrieve successfull", patientList, true);
-        return response;
+        List<Patient> patientList = patientDAO.getAllPatients();
+        return new StandardResponse<>(200, "Patient list retrieve successfull", patientList, true);
     }
     catch(Exception ex){
-    return new StandardResponse(400, ex.getMessage(), null, false);
+    return new StandardResponse<>(400, ex.getMessage(), null, false);
     }
     }
     
@@ -88,15 +93,15 @@ public class PatientService implements IPatientService{
         var result = patientDAO.findById(id);
         if(result!=null){
         patientDAO.updatePatient(patient);
-        return new StandardResponse(200, "Patient update successfull", patient, true);
+        return new StandardResponse<>(200, "Patient update successfull", patient, true);
         }
         else{
-        return new StandardResponse(400, "Patient not available", patient, false);
+        return new StandardResponse<>(400, "Patient not available", patient, false);
         }
     }
         
     catch(Exception ex){
-        return new StandardResponse(400, ex.getMessage(), patient, false);     
+        return new StandardResponse<>(400, ex.getMessage(), patient, false);
 }
 }
     

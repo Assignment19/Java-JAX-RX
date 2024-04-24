@@ -16,6 +16,5 @@ public class StandardResponse<T> {
     public String message;
     public T data;
     public boolean isSuccess;
-    
-    
+
 }
