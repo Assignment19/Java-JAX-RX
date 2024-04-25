@@ -32,7 +32,6 @@ public class PersonService implements IPersonService {
             return new StandardResponse<>(400, ex.getMessage(), null, false);}
     }
 
-
     @Override
     public StandardResponse<Person> savePerson(Person person){
         try{
@@ -40,12 +39,9 @@ public class PersonService implements IPersonService {
             if(result==null){
                 personDAO.createPerson(person);
                 return new StandardResponse<>(200, "Create Success", person, true);
-
-
             }
             else{
                 return new StandardResponse<>(400, "Person Already Inserted", person, false);
-
             }
         }
         catch(Exception ex){
@@ -60,7 +56,6 @@ public class PersonService implements IPersonService {
                 personDAO.deletePerson(id);
                 return new StandardResponse<>(200, "Remove Success", result, true);
             }
-
             else{
                 return new StandardResponse<>(400, "User not found", result, false);
             }
@@ -68,9 +63,7 @@ public class PersonService implements IPersonService {
         catch(Exception ex){
             return new StandardResponse<>(400, ex.getMessage(), null, false);
         }
-
     }
-
 
     @Override
     public StandardResponse<List<Person>> getAllPersons(){
@@ -95,7 +88,6 @@ public class PersonService implements IPersonService {
                 return new StandardResponse<>(400, "Patient not available", person, false);
             }
         }
-
         catch(Exception ex){
             return new StandardResponse<>(400, ex.getMessage(), person, false);
         }

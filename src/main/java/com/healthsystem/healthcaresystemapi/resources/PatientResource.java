@@ -1,5 +1,6 @@
 package com.healthsystem.healthcaresystemapi.resources;
 import com.healthsystem.healthcaresystemapi.models.Patient;
+import com.healthsystem.healthcaresystemapi.models.PatientWithPerson;
 import com.healthsystem.healthcaresystemapi.services.PatientService;
 import com.healthsystem.healthcaresystemapi.utility.StandardResponse;
 
@@ -17,7 +18,7 @@ import io.swagger.annotations.ApiResponses;
 import com.healthsystem.healthcaresystemapi.utility.Async;
 
 
-@Path("/patients")
+@Path("/patient")
 @Api(value = "/patients", description = "Operations about patients")
 public class PatientResource {
     private final PatientService patientService;
@@ -29,14 +30,14 @@ public class PatientResource {
 @GET
 @Path("/{id}")
 @Produces(MediaType.APPLICATION_JSON)
-public StandardResponse<Patient> getPatient(@PathParam("id") int id) {
+public StandardResponse<PatientWithPerson> getPatient(@PathParam("id") int id) {
   return patientService.getPatientById(id);
 }
 
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
-    public StandardResponse<Patient> createPatient(Patient patient) {
+    public StandardResponse<PatientWithPerson> createPatient(Patient patient) {
         return (patientService.savePatient(patient));
     }
     
@@ -44,7 +45,7 @@ public StandardResponse<Patient> getPatient(@PathParam("id") int id) {
    @Path("/get-all-patients")
    @Produces(MediaType.APPLICATION_JSON)
    @Consumes(MediaType.APPLICATION_JSON)
-   public StandardResponse<List<Patient>> getAllPatients(){
+   public StandardResponse<List<PatientWithPerson>> getAllPatients(){
    return patientService.getAllPatients();
    }
 
@@ -57,7 +58,7 @@ public StandardResponse<Patient> getPatient(@PathParam("id") int id) {
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
     public Response getAllPatient() {
-        StandardResponse<List<Patient>> response = patientService.getAllPatients();
+        StandardResponse<List<PatientWithPerson>> response = patientService.getAllPatients();
         if (response.isSuccess()) {
             return Response.ok(response.getData()).build();
         } else {

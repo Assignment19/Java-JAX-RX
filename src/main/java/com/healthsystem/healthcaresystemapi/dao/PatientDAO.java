@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PatientDAO implements IPatientDAO{
-     private static final Map<Integer, Patient> patientMap = new HashMap<>();
+    private static final Map<Integer, Patient> patientMap = new HashMap<>();
      
     @Override
     public Patient findById(int id) {
@@ -42,10 +42,10 @@ public class PatientDAO implements IPatientDAO{
     
     @Override
     public List<Patient> getAllPatients() {
-    List<Patient> allPatients = new ArrayList<>();
-    for (Map.Entry<Integer, Patient> entry : patientMap.entrySet()) {
-    allPatients.add(entry.getValue());
-    }
-    return allPatients;
+        List<Patient> allPatients = new ArrayList<>();
+        for (Map.Entry<Integer, Patient> entry : patientMap.entrySet()) {
+            allPatients.add(entry.getValue());
+        }
+        return allPatients;
     }   
 }

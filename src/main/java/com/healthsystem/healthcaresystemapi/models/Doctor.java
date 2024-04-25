@@ -1,13 +1,14 @@
 package com.healthsystem.healthcaresystemapi.models;
+
 import lombok.*;
 
-
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Patient extends Person{
+public class Doctor {
     private long id;
+    private String title;
     private long personId;
-    private String medicalHistory;
-    private String currentHealthStatus;
 }
