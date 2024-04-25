@@ -13,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppoinmentWithDoctorAndPatient {
+    private long id;
     private Date appoinmentDate;
     private String description;
     private PatientWithPerson patient;

@@ -43,7 +43,7 @@ public class AppoinmentService implements IAppoinmentService {
                 var patient = patientService.getPatientById((int)patientId).data;
                 var doctor = doctorService.getDoctorById((int)doctorId).data;
                 if(patient!=null&&doctor!=null){
-                    AppoinmentWithDoctorAndPatient appoinmentWithDoctorAndPatient = new AppoinmentWithDoctorAndPatient(appoinment.getAppoinmentDate(),appoinment.getDescription(),
+                    AppoinmentWithDoctorAndPatient appoinmentWithDoctorAndPatient = new AppoinmentWithDoctorAndPatient(appoinment.getId(),appoinment.getAppoinmentDate(),appoinment.getDescription(),
                          patient, doctor );
                     return new StandardResponse<>(200, "Appointment retrieve Success", appoinmentWithDoctorAndPatient, true);}
 
@@ -73,7 +73,7 @@ public class AppoinmentService implements IAppoinmentService {
                 var result = appoinmentDAO.findById((int)appointment.getId());
                 if(result==null){
                     appoinmentDAO.createAppoinment(appointment);
-                    AppoinmentWithDoctorAndPatient appoinmentWithDoctorAndPatient = new AppoinmentWithDoctorAndPatient(appointment.getAppoinmentDate(),appointment.getDescription(),
+                    AppoinmentWithDoctorAndPatient appoinmentWithDoctorAndPatient = new AppoinmentWithDoctorAndPatient(appointment.getId(),appointment.getAppoinmentDate(),appointment.getDescription(),
                             patient, doctor );
 
                     return new StandardResponse<>(200, "Appointment Create Success", appoinmentWithDoctorAndPatient, true);
@@ -137,7 +137,7 @@ public class AppoinmentService implements IAppoinmentService {
                 var patientId = appoinmentList.get(i).getPatientId();
                 var doctor = doctorService.getDoctorById((int)doctorId).getData();
                 var patient = patientService.getPatientById((int)patientId).getData();
-                AppoinmentWithDoctorAndPatient appoinmentWithDoctorAndPatient = new AppoinmentWithDoctorAndPatient(appoinmentList.get(i).getAppoinmentDate(), appoinmentList.get(i).getDescription(),
+                AppoinmentWithDoctorAndPatient appoinmentWithDoctorAndPatient = new AppoinmentWithDoctorAndPatient(appoinmentList.get(i).getId(),appoinmentList.get(i).getAppoinmentDate(), appoinmentList.get(i).getDescription(),
                         patient, doctor );
                 userList.add(i, appoinmentWithDoctorAndPatient);
             }
