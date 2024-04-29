@@ -48,18 +48,18 @@ public class AppoinmentService implements IAppoinmentService {
                     return new StandardResponse<>(200, "Appointment retrieve Success", appoinmentWithDoctorAndPatient, true);}
 
                 else{
-                    return new StandardResponse<>(400, "Person or Doctor not available", null, true);
+                    return new StandardResponse<>(404, "Person or Doctor not available", null, true);
 
                 }
 
             }
             else{
-                return new StandardResponse<>(400, "Appointment not available", null, false);
+                return new StandardResponse<>(404, "Appointment not available", null, false);
 
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
 
     @Override
@@ -80,15 +80,15 @@ public class AppoinmentService implements IAppoinmentService {
 
                 }
                 else{
-                    return new StandardResponse<>(400, "Appointment Already Inserted", null, false);
+                    return new StandardResponse<>(404, "Appointment Already Inserted", null, false);
 
                 }}
             else{
-                return new StandardResponse<>(400, "Person and Doctor not available", null, false);
+                return new StandardResponse<>(404, "Person and Doctor not available", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
 
     @Override
@@ -101,11 +101,11 @@ public class AppoinmentService implements IAppoinmentService {
             }
 
             else{
-                return new StandardResponse<>(400, "Appointment not found", null, false);
+                return new StandardResponse<>(404, "Appointment not found", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
 
     }
@@ -119,11 +119,11 @@ public class AppoinmentService implements IAppoinmentService {
                 return new StandardResponse<>(200, "Appointment update successfull", appointment, true);
             }
             else{
-                return new StandardResponse<>(400, "Appointment not available", appointment, false);
+                return new StandardResponse<>(404, "Appointment not available", appointment, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
 
@@ -144,7 +144,7 @@ public class AppoinmentService implements IAppoinmentService {
             return new StandardResponse<>(200, "Appointment list retrieve successfully", userList, true);
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
 

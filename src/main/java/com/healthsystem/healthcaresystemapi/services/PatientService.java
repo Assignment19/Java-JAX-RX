@@ -38,15 +38,15 @@ public class PatientService implements IPatientService{
                     patientWithPerson.setCurrentHealthStatus(patient.getCurrentHealthStatus());
                     return new StandardResponse<>(200, "Success", patientWithPerson, true);}
                 else{
-                    return new StandardResponse<>(400, "Person not available", null, true);
+                    return new StandardResponse<>(404, "Person not available", null, true);
                 }
             }
             else{
-                return new StandardResponse<>(400, "Patient not available", null, false);
+                return new StandardResponse<>(404, "Patient not available", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
     
     
@@ -67,14 +67,14 @@ public class PatientService implements IPatientService{
                     return new StandardResponse<>(200, "Create Success", patientWithPerson, true);
                 }
                 else{
-                    return new StandardResponse<>(400, "Patient Already Inserted", null, false);
+                    return new StandardResponse<>(404, "Patient Already Inserted", null, false);
                 }}
             else{
-                return new StandardResponse<>(400, "Person not available", null, false);
+                return new StandardResponse<>(404, "Person not available", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     } 
     
     @Override
@@ -86,11 +86,11 @@ public class PatientService implements IPatientService{
                 return new StandardResponse<>(200, "Remove Success", result, true);
             }
             else{
-                return new StandardResponse<>(400, "Patient not found to remove", null, false);
+                return new StandardResponse<>(404, "Patient not found to remove", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
     
@@ -114,7 +114,7 @@ public class PatientService implements IPatientService{
             return new StandardResponse<>(200, "Doctor list retrieve successfull", userList, true);
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
     
@@ -127,11 +127,11 @@ public class PatientService implements IPatientService{
                 return new StandardResponse<>(200, "Patient update successfull", patient, true);
             }
             else{
-                return new StandardResponse<>(400, "Patient not available to update", patient, false);
+                return new StandardResponse<>(404, "Patient not available to update", patient, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), patient, false);
+            return new StandardResponse<>(500, ex.getMessage(), patient, false);
         }
     }
 }

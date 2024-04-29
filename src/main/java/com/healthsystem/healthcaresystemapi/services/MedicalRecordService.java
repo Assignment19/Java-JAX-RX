@@ -40,18 +40,18 @@ public class MedicalRecordService implements IMedicalRecordService {
                     return new StandardResponse<>(200, "Medical Record retrieve Success", medicalRecordWithPatient, true);}
 
                 else{
-                    return new StandardResponse<>(400, "Patient not available", null, true);
+                    return new StandardResponse<>(404, "Patient not available", null, true);
 
                 }
 
             }
             else{
-                return new StandardResponse<>(400, "Medical Record is not available", null, false);
+                return new StandardResponse<>(404, "Medical Record is not available", null, false);
 
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
 
     @Override
@@ -70,15 +70,15 @@ public class MedicalRecordService implements IMedicalRecordService {
 
                 }
                 else{
-                    return new StandardResponse<>(400, "Medical record Already Inserted", null, false);
+                    return new StandardResponse<>(404, "Medical record Already Inserted", null, false);
 
                 }}
             else{
-                return new StandardResponse<>(400, "Patient and Doctor not available", null, false);
+                return new StandardResponse<>(404, "Patient and Doctor not available", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
 
     @Override
@@ -91,11 +91,11 @@ public class MedicalRecordService implements IMedicalRecordService {
             }
 
             else{
-                return new StandardResponse<>(400, "Medical record not found", null, false);
+                return new StandardResponse<>(404, "Medical record not found", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
 
     }
@@ -109,11 +109,11 @@ public class MedicalRecordService implements IMedicalRecordService {
                 return new StandardResponse<>(200, "Medical Record update successfully", medicalRecord, true);
             }
             else{
-                return new StandardResponse<>(400, "Medical record not available", medicalRecord, false);
+                return new StandardResponse<>(404, "Medical record not available", medicalRecord, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
 
@@ -132,7 +132,7 @@ public class MedicalRecordService implements IMedicalRecordService {
             return new StandardResponse<>(200, "Medical record list retrieve successfully", userList, true);
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
 

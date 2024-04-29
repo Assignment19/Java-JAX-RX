@@ -34,18 +34,18 @@ public class BillingService implements IBillingService {
                     return new StandardResponse<>(200, "Success", billingWithPerson, true);}
 
                 else{
-                    return new StandardResponse<>(400, "Person not available", null, true);
+                    return new StandardResponse<>(404, "Person not available", null, true);
 
                 }
 
             }
             else{
-                return new StandardResponse<>(400, "bill not available", null, false);
+                return new StandardResponse<>(404, "bill not available", null, false);
 
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
 
     public StandardResponse<BillingWithPerson> saveBill(Billing billing){
@@ -66,15 +66,15 @@ public class BillingService implements IBillingService {
 
                 }
                 else{
-                    return new StandardResponse<>(400, "Bill Already Inserted", null, false);
+                    return new StandardResponse<>(404, "Bill Already Inserted", null, false);
 
                 }}
             else{
-                return new StandardResponse<>(400, "Person not available", null, false);
+                return new StandardResponse<>(404, "Person not available", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
     @Override
     public StandardResponse<Billing> removeBill(int id){
@@ -85,11 +85,11 @@ public class BillingService implements IBillingService {
                 return new StandardResponse<>(200, "Remove Success", result, true);
             }
             else{
-                return new StandardResponse<>(400, "Bill not found", null, false);
+                return new StandardResponse<>(404, "Bill not found", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
 
@@ -113,7 +113,7 @@ public class BillingService implements IBillingService {
             return new StandardResponse<>(200, "Billing list retrieve successfully", billListWithPerson, true);
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
 
@@ -126,11 +126,11 @@ public class BillingService implements IBillingService {
                 return new StandardResponse<>(200, "Bill update successfull", billing, true);
             }
             else{
-                return new StandardResponse<>(400, "Bill not available", billing, false);
+                return new StandardResponse<>(404, "Bill not available", billing, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), billing, false);
+            return new StandardResponse<>(500, ex.getMessage(), billing, false);
         }
     }
 

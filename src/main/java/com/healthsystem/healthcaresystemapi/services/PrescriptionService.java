@@ -43,18 +43,18 @@ public class PrescriptionService implements IPrescriptionService {
                     return new StandardResponse<>(200, "Prescription retrieve Success", prescriptionWithPatientAndDoctor, true);}
 
                 else{
-                    return new StandardResponse<>(400, "Person or Doctor not available", null, true);
+                    return new StandardResponse<>(404, "Person or Doctor not available", null, true);
 
                 }
 
             }
             else{
-                return new StandardResponse<>(400, "Prescription not available", null, false);
+                return new StandardResponse<>(404, "Prescription not available", null, false);
 
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
 
     @Override
@@ -75,15 +75,15 @@ public class PrescriptionService implements IPrescriptionService {
 
                 }
                 else{
-                    return new StandardResponse<>(400, "Prescription Already Inserted", null, false);
+                    return new StandardResponse<>(404, "Prescription Already Inserted", null, false);
 
                 }}
             else{
-                return new StandardResponse<>(400, "Person and Doctor not available", null, false);
+                return new StandardResponse<>(404, "Person and Doctor not available", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
 
     @Override
@@ -96,11 +96,11 @@ public class PrescriptionService implements IPrescriptionService {
             }
 
             else{
-                return new StandardResponse<>(400, "Prescription is not found", null, false);
+                return new StandardResponse<>(404, "Prescription is not found", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
 
     }
@@ -116,16 +116,16 @@ public class PrescriptionService implements IPrescriptionService {
                 prescriptionDAO.updatePrescription(prescription);
                 return new StandardResponse<>(200, "Prescription update successfull", prescription, true);}
                 else{
-                    return new StandardResponse<>(200, "Patient or Doctor not available to update", null, true);
+                    return new StandardResponse<>(404, "Patient or Doctor not available to update", null, true);
 
                 }
             }
             else{
-                return new StandardResponse<>(400, "Prescription not available", prescription, false);
+                return new StandardResponse<>(404, "Prescription not available", prescription, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
 
@@ -146,7 +146,7 @@ public class PrescriptionService implements IPrescriptionService {
             return new StandardResponse<>(200, "Prescription list retrieve successfully", userList, true);
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
 

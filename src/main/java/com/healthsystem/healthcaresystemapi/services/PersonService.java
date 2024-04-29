@@ -9,7 +9,10 @@ import lombok.var;
 import java.util.List;
 
 public class PersonService implements IPersonService {
+
     private final PersonDAO personDAO;
+
+
 
     public PersonService(){
         this.personDAO = new PersonDAO();
@@ -24,12 +27,12 @@ public class PersonService implements IPersonService {
 
             }
             else{
-                return new StandardResponse<>(400, "person not available", null, false);
+                return new StandardResponse<>(404, "person not available", null, false);
 
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
 
     @Override
@@ -41,11 +44,11 @@ public class PersonService implements IPersonService {
                 return new StandardResponse<>(200, "Create Success", person, true);
             }
             else{
-                return new StandardResponse<>(400, "Person Already Inserted", person, false);
+                return new StandardResponse<>(404, "Person Already Inserted", person, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
 
     @Override
@@ -57,11 +60,11 @@ public class PersonService implements IPersonService {
                 return new StandardResponse<>(200, "Remove Success", result, true);
             }
             else{
-                return new StandardResponse<>(400, "User not found", result, false);
+                return new StandardResponse<>(404, "User not found", result, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
 
@@ -72,7 +75,7 @@ public class PersonService implements IPersonService {
             return new StandardResponse<>(200, "Person list retrieve successfull", personList, true);
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
 
@@ -85,11 +88,11 @@ public class PersonService implements IPersonService {
                 return new StandardResponse<>(200, "Patient update successfull", person, true);
             }
             else{
-                return new StandardResponse<>(400, "Patient not available", person, false);
+                return new StandardResponse<>(404, "Patient not available", person, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), person, false);
+            return new StandardResponse<>(500, ex.getMessage(), person, false);
         }
     }
 }

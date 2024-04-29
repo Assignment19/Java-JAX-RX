@@ -1,8 +1,4 @@
-/*!
- * Java REST API
- * Author: Roshan Gade
- * Date: 14/7/18
- */
+
 package com.healthsystem.healthcaresystemapi.utility;
 
 import java.io.FileInputStream;

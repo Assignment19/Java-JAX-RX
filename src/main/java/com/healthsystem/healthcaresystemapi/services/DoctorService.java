@@ -39,18 +39,18 @@ public class DoctorService implements IDoctorService {
                 return new StandardResponse<>(200, "Success", doctorWithPerson, true);}
 
                 else{
-                    return new StandardResponse<>(400, "Person not available", null, true);
+                    return new StandardResponse<>(404, "Person not available", null, true);
 
                 }
 
             }
             else{
-                return new StandardResponse<>(400, "doctor not available", null, false);
+                return new StandardResponse<>(404, "doctor not available", null, false);
 
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
 
     @Override
@@ -70,15 +70,15 @@ public class DoctorService implements IDoctorService {
 
             }
             else{
-                return new StandardResponse<>(400, "Doctor Already Inserted", null, false);
+                return new StandardResponse<>(404, "Doctor Already Inserted", null, false);
 
             }}
             else{
-                return new StandardResponse<>(400, "Person not available", null, false);
+                return new StandardResponse<>(404, "Person not available", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);}
+            return new StandardResponse<>(500, ex.getMessage(), null, false);}
     }
 
     @Override
@@ -91,11 +91,11 @@ public class DoctorService implements IDoctorService {
             }
 
             else{
-                return new StandardResponse<>(400, "Doctor not found", null, false);
+                return new StandardResponse<>(404, "Doctor not found", null, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
 
     }
@@ -118,7 +118,7 @@ public class DoctorService implements IDoctorService {
             return new StandardResponse<>(200, "Doctor list retrieve successfully", userList, true);
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), null, false);
+            return new StandardResponse<>(500, ex.getMessage(), null, false);
         }
     }
 
@@ -131,11 +131,11 @@ public class DoctorService implements IDoctorService {
                 return new StandardResponse<>(200, "Doctor update successfull", doctor, true);
             }
             else{
-                return new StandardResponse<>(400, "Doctor not available", doctor, false);
+                return new StandardResponse<>(404, "Doctor not available", doctor, false);
             }
         }
         catch(Exception ex){
-            return new StandardResponse<>(400, ex.getMessage(), doctor, false);
+            return new StandardResponse<>(500, ex.getMessage(), doctor, false);
         }
     }
 }
