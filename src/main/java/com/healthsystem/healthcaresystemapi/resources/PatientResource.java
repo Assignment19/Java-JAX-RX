@@ -4,18 +4,17 @@ import com.healthsystem.healthcaresystemapi.models.PatientWithPerson;
 import com.healthsystem.healthcaresystemapi.services.PatientService;
 import com.healthsystem.healthcaresystemapi.utility.StandardResponse;
 
-import java.util.HashMap;
+
 import java.util.List;
-import javax.inject.Inject;
+
 import javax.ws.rs.*;
-import javax.ws.rs.container.AsyncResponse;
-import javax.ws.rs.container.Suspended;
+
 import javax.ws.rs.core.*;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import com.healthsystem.healthcaresystemapi.utility.Async;
+
 
 
 @Path("/patient")
@@ -41,29 +40,12 @@ public StandardResponse<PatientWithPerson> getPatient(@PathParam("id") int id) {
         return (patientService.savePatient(patient));
     }
     
-   @GET
-   @Path("/get-all-patients")
-   @Produces(MediaType.APPLICATION_JSON)
-   @Consumes(MediaType.APPLICATION_JSON)
-   public StandardResponse<List<PatientWithPerson>> getAllPatients(){
-   return patientService.getAllPatients();
-   }
-
-
     @GET
-    @Path("/get-all")
+    @Path("/get-all-patients")
     @Produces(MediaType.APPLICATION_JSON)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = Patient.class),
-            @ApiResponse(code = 500, message = "Internal Server Error")
-    })
-    public Response getAllPatient() {
-        StandardResponse<List<PatientWithPerson>> response = patientService.getAllPatients();
-        if (response.isSuccess()) {
-            return Response.ok(response.getData()).build();
-        } else {
-            return Response.serverError().entity(response.getMessage()).build();
-        }
+    @Consumes(MediaType.APPLICATION_JSON)
+    public StandardResponse<List<PatientWithPerson>> getAllPatients(){
+    return patientService.getAllPatients();
     }
    
     @PUT
